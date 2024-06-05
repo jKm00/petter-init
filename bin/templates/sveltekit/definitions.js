@@ -3,10 +3,14 @@ import { PACKAGE_MANAGER_MAP } from "../../helper.js";
 export const TEMPLATES = [
 	{
 		name: "basic",
-		initCommand: (packageManager, projectName) =>
-			`${packageManager} create svelte${
-				packageManager !== "yarn" ? "@latest" : ""
-			} ${projectName}`,
+		initOptions: {
+			template: 'default',
+			types: 'typescript',
+			prettier: true,
+			esling: true,
+			playwright: true,
+			vitest: true
+		},
 		files: [
 			{ source: "tailwind.config.js", destination: ["tailwind.config.js"] },
 			{ source: "svelte.config.js", destination: ["svelte.config.js"] },
@@ -28,11 +32,15 @@ export const TEMPLATES = [
 	},
   {
     name: "JKMKit",
-    initCommand: (packageManager, projectName) =>
-		`${packageManager} create svelte${
-			packageManager !== "yarn" ? "@latest" : ""
-		} ${projectName} --template skeleton`,
-    files: [
+    initOptions: {
+			template: 'skeleton',
+			types: 'typescript',
+			prettier: true,
+			eslint: true,
+			playwright: true,
+			vitest: true
+		},
+		files: [
 			// tailwind / shadcn
 			{ source: 'svelte.config.js', destination: [ 'svelte.config.js' ] },
 			// mode-watcher / sonner / flash messages

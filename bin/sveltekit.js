@@ -4,6 +4,7 @@ import chalk from "chalk";
 import { TEMPLATES } from "./templates/sveltekit/definitions.js";
 import path from "path";
 import inquirer from "inquirer";
+import { create } from "create-svelte";
 
 /**
  * Prompt the user to choose a SvelteKit template
@@ -31,12 +32,12 @@ export default async function chooseSvelteKitTemplate() {
  * Setup project based on selected template
  * @param {*} template selected template
  */
-function setupProject(template) {
+async function setupProject(template) {
 	const { packageManager, projectName } = getProjectInfo();
 
 	console.log("Setup your SvelteKit project...");
 
-	initProject(packageManager, projectName, template);
+	await initProject(projectName, template);
 	installLibraries(packageManager, projectName, template);
 	copyTemplateFiles(template);
 
@@ -49,8 +50,16 @@ function setupProject(template) {
  * @param {*} projectName name of the project
  * @param {*} template template to initialize with
  */
-function initProject(packageManager, projectName, template) {
-	helper.executeCommand(template.initCommand(packageManager, projectName));
+async function initProject(projectName, template) {
+	await create(projectName, {
+		name: projectName,
+		template: template.tempalte, 
+		types: template.types,
+		prettier: template.prettier,
+		eslint: template.eslint,
+		playwright: template.playwright,
+		vitest: template.vitest
+	});
 }
 
 /**
