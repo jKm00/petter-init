@@ -53,12 +53,12 @@ async function setupProject(template) {
 async function initProject(projectName, template) {
 	await create(projectName, {
 		name: projectName,
-		template: template.tempalte, 
-		types: template.types,
-		prettier: template.prettier,
-		eslint: template.eslint,
-		playwright: template.playwright,
-		vitest: template.vitest
+		template: template.initOptions.template, 
+		types: template.initOptions.types,
+		prettier: template.initOptions.prettier,
+		eslint: template.initOptions.eslint,
+		playwright: template.initOptions.playwright,
+		vitest: template.initOptions.vitest
 	});
 }
 
